@@ -13,9 +13,10 @@ class AppContainer extends HTMLElement {
     }
 
     render() {
-        const something = this.ownerDocument.createElement('div');
-        this.shadowRoot?.appendChild(something);
+        const appCard = this.ownerDocument.createElement('app-card');
+        this.shadowRoot?.appendChild(appCard);
     }
 }
+
 
 customElements.define('app-container', AppContainer)

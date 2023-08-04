@@ -28,3 +28,4 @@ class AppCard extends HTMLElement {
 }
 
 customElements.define('app-card', AppCard)
+export default AppCard
