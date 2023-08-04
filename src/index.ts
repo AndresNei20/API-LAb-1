@@ -18,12 +18,14 @@ export class AppContainer extends HTMLElement {
     async render(action:any) {
         console.log (action)
         if (this.shadowRoot){
-            action.response.forEach((data:any)=>{
+            action.results.forEach((info:any)=>{
+               
                 const pokeCard = this.ownerDocument.createElement(
                     "app-card") as AppCard;
-                    pokeCard.setAttribute(Attribute.name, data.name);
-                   pokeCard.setAttribute(Attribute.number, data.number);
-                    pokeCard.setAttribute(Attribute.imagen, data.image);
+                    console.log(info)
+                    pokeCard.setAttribute(Attribute.name, info.name);
+                    //pokeCard.setAttribute(Attribute.number, data.number);
+                    pokeCard.setAttribute(Attribute.imagen, info.url);
                     this.shadowRoot?.appendChild(pokeCard);
     
             })
