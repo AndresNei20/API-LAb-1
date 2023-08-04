@@ -1,4 +1,5 @@
 import "./components/export"
+import { pokeApi } from "./components/utils/fetch";
 
 class AppContainer extends HTMLElement {
     constructor(){
@@ -6,8 +7,9 @@ class AppContainer extends HTMLElement {
         this.attachShadow({mode: "open"})
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         this.render()
+        await pokeApi();
     }
 
     render() {
