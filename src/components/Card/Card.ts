@@ -1,28 +1,69 @@
+
+export enum Attribute {
+    "name" = "name",
+    "number" = "number",
+    "imagen" = "imagen",
+}
+
 class AppCard extends HTMLElement {
-    constructor(){
-        super();
-        this.attachShadow({mode: "open"})
+    name?: string;
+    number?: string;
+    imagen?: string;
+
+
+
+    static get observedAttributes() {
+        const attributes: Record<Attribute, null> = {
+            name: null,
+            number: null,
+            imagen: null,
+        };
+        return Object.keys(attributes)
     }
 
+    constructor() {
+        super();
+        this.attachShadow({ mode: "open" })
+    }
     connectedCallback() {
         this.render()
     }
 
+    attributeChangedCallback(
+        propName: Attribute,
+        _:string | undefined,
+        newValue: string | undefined,
+        
+        ){
+            switch (propName) {
+                default:
+                this[propName] = newValue;
+                break;}
+        
+            this.render();
+        
+        }
+
     render() {
 
-        const figure = this.ownerDocument.createElement('figure')
-
-        const name = this.ownerDocument.createElement('h2');
-        name.textContent = "waiting name"
-        figure.appendChild(name)
-        const pokeDex = this.ownerDocument.createElement('h3')
-        figure.appendChild(pokeDex)
-        pokeDex.textContent = "waiting number of pokeDex"
-        const pokeImg = this.ownerDocument.createElement('img')
-        
-        figure.appendChild(pokeImg)
-
-        this.shadowRoot?.appendChild(figure)
+        if(this.shadowRoot) {
+            this.shadowRoot.innerHTML=``
+    
+            this.shadowRoot.innerHTML+= `
+            <link rel="stylesheet" href="../src/components/Card/Card.css">
+            <section id="section">
+            <ul>
+            
+            <h1>Name: ${this.name}</h1>
+            <h2>#  ${this.number}</h2>
+            <img src="${this.imagen}"></img>
+            
+            </ul>
+            
+            
+            </section>
+            `;
+        }
 
     }
 }
